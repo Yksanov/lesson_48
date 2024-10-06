@@ -68,11 +68,11 @@ public class MyServer
                     
                     Employee employee = new Employee()
                     {
-                        Id = _employees.Count + 1,
-                        Name = HttpUtility.UrlDecode(emp[0].Split("=")[1]),
-                        Surname = HttpUtility.UrlDecode(emp[1].Split("=")[1]),
-                        About = HttpUtility.UrlDecode(emp[2].Split("=")[1]),
-                        Age = Convert.ToInt32(emp[3].Split("=")[1])
+                        Id = Convert.ToInt32(emp[0].Split("=")[1]) + 1,
+                        Name = HttpUtility.UrlDecode(emp[1].Split("=")[1]),
+                        Surname = HttpUtility.UrlDecode(emp[2].Split("=")[1]),
+                        About = HttpUtility.UrlDecode(emp[3].Split("=")[1]),
+                        Age = Convert.ToInt32(emp[4].Split("=")[1])
                     };
                     _employees.Add(employee);
                     JsonSerializerOptions op = new JsonSerializerOptions()
@@ -82,10 +82,10 @@ public class MyServer
                     };
                     
                     File.WriteAllText("../../../employees.json", JsonSerializer.Serialize(_employees, op));
-                    context.Response.Redirect("/index.html");
+                    context.Response.Redirect("/showEmployees.html");
                 }
                 
-                if (context.Request.Url.AbsolutePath == "/index.html")
+                if (context.Request.Url.AbsolutePath == "/showEmployees.html")
                 {
                     List<Employee> employee = new List<Employee>(_employees);
                     if (context.Request.QueryString["IdFrom"] != null)
@@ -134,8 +134,8 @@ public class MyServer
             razorService.AddTemplate(filename, File.ReadAllText(filename));
             razorService.Compile(filename);
         }
-        var Model = new { Employee = employees };
-        html = razorService.Run(filename, null, Model);
+        var viewModel = new { Employee = employees };
+        html = razorService.Run(filename, null, viewModel);
         return html;
     }
     //-------------------------------------------------

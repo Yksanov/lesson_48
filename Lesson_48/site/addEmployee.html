@@ -1,7 +1,6 @@
 @{
-    Layout = layout
+    Layout = "layout";
 }
-
 <script src="https://kit.fontawesome.com/34932d7774.js" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
@@ -9,29 +8,29 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="stylesheet" href="style.css">
 <body class="bg-warning">
-        <div class="container">
-            <form method="post" action="addEmployee.html">
-                <div class="mb-3">
-                    <label for="ID" class="form-label">ID</label>
-                    <input type="text" class="form-control" id="ID">
-                </div>
-                <div class="mb-3">
-                    <label for="Name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="Name">
-                </div>
-                <div class="mb-3">
-                    <label for="Surname" class="form-label">Surname</label>
-                    <input type="text" class="form-control" id="Surname">
-                </div>
-                <div class="mb-3">
-                    <label for="About" class="form-label">About</label>
-                    <input type="text" class="form-control" id="About">
-                </div>
-                <div class="mb-3">
-                    <label for="Age" class="form-label">Age</label>
-                    <input type="text" class="form-control" id="Age">
-                </div>
-                <button type="submit" class="btn btn-primary">Добавить</button>
+        <div class="container col-4">
+            <form method="post" action="addEmployee.html" class="my-5">
+                <label class="text-black" for="ID">ID</label>
+                <br>
+                <input type="text" name="ID" class="form-control bg-white" id="ID">
+                <br>
+                <label class="text-black" for="Name">Name</label>
+                <br>
+                <input type="text" name="Name" class="form-control" id="Name">
+                <br>
+                <label class="text-black" for="Surname">Surname</label>
+                <br>
+                <input type="text" name="Surname" class="form-control" id="Surname">
+                <br>
+                <label class="text-black" for="About">About</label>
+                <br>
+                <input type="text" name="About" class="form-control" id="About">
+                <br>
+                <label class="text-black" for="Age">Age</label>
+                <br>
+                <input type="text" name="Age" class="form-control" id="Age">
+                <br>
+                <input class=" btn d-block p-3 bg-primary text-white mx-5 px-5" type="submit" value="Добавить">
             </form>
         </div>
 </body>

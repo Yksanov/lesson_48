@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "Id": 1,
+    "Name": "Task 1",
+    "Surname": "User1",
+    "About": "Box",
+    "Age": 25
+  },
+  {
+    "Id": 2,
+    "Name": "Eldos",
+    "Surname": "Yksanov",
+    "About": "Football",
+    "Age": 22
+  },
+  {
+    "Id": 3,
+    "Name": "Максым",
+    "Surname": "Yksanov",
+    "About": "Football",
+    "Age": 333
+  },
+  {
+    "Id": 4,
+    "Name": "Максым",
+    "Surname": "Dastan",
+    "About": "Swim",
+    "Age": 25
+  }
+]
