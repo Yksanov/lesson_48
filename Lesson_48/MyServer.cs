@@ -55,11 +55,11 @@ public class MyServer
             try
             {
                 string content = BuildHtml(filename, new List<Employee>());
-                if (context.Request.HttpMethod == "POST" && context.Request.Url.AbsolutePath == "/addEmployee.html")
-                {
-                    StreamReader st = new StreamReader(context.Request.InputStream);
-                    content = BuildHtml(filename, new List<Employee>());
-                }
+                // if (context.Request.HttpMethod == "POST" && context.Request.Url.AbsolutePath == "/addEmployee.html")
+                // {
+                //     StreamReader st = new StreamReader(context.Request.InputStream);
+                //     content = BuildHtml(filename, new List<Employee>());
+                // }
                 
                 if (context.Request.HttpMethod == "POST" && context.Request.Url.AbsolutePath == "/addEmployee.html")
                 {
@@ -83,6 +83,12 @@ public class MyServer
                     
                     File.WriteAllText("../../../employees.json", JsonSerializer.Serialize(_employees, op));
                     context.Response.Redirect("/showEmployees.html");
+                }
+
+                if (context.Request.HttpMethod == "GET" && context.Request.Url.AbsolutePath == "/employee.html")
+                {
+                    List<Employee> employees = _employees.Where(e => e.Id == Convert.ToInt32(context.Request.QueryString["id"])).ToList();
+                    content = BuildHtml(filename, employees);
                 }
                 
                 if (context.Request.Url.AbsolutePath == "/showEmployees.html")
@@ -135,6 +141,30 @@ public class MyServer
             razorService.Compile(filename);
         }
         var viewModel = new { Employee = employees };
+        html = razorService.Run(filename, null, viewModel);
+        return html;
+    }
+    
+    private string BuildHtml(string filename, Employee? employee)
+    {
+        string html = "";
+        string layoutPath = _siteDirectory + "/layout.html";
+        var razorService = Engine.Razor;
+        if (!razorService.IsTemplateCached("layout", null))
+            razorService.AddTemplate("layout", File.ReadAllText(layoutPath));
+        if (!razorService.IsTemplateCached(filename, null))
+        {
+            razorService.AddTemplate(filename, File.ReadAllText(filename));
+            razorService.Compile(filename);
+        }
+
+        /*if (employee == null)
+        {
+            employee = new Employee();
+            employee.Id = 0;
+            employee.Name = "Not known";
+        }*/
+        var viewModel = new { Employee = employee };
         html = razorService.Run(filename, null, viewModel);
         return html;
     }
