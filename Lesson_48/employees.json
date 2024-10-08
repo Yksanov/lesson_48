@@ -33,5 +33,12 @@
     "Surname": "Nasirdinov",
     "About": "Football",
     "Age": 23
+  },
+  {
+    "Id": 6,
+    "Name": "Dastan",
+    "Surname": "Nasidinov",
+    "About": "Programming",
+    "Age": 23
   }
 ]

@@ -85,11 +85,7 @@ public class MyServer
                     context.Response.Redirect("/showEmployees.html");
                 }
 
-                if (context.Request.HttpMethod == "GET" && context.Request.Url.AbsolutePath == "/employee.html")
-                {
-                    List<Employee> employees = _employees.Where(e => e.Id == Convert.ToInt32(context.Request.QueryString["id"])).ToList();
-                    content = BuildHtml(filename, employees);
-                }
+                
                 
                 if (context.Request.Url.AbsolutePath == "/showEmployees.html")
                 {
@@ -104,6 +100,14 @@ public class MyServer
                     }
                     content = BuildHtml(filename, employee);
                 }
+                
+                if (context.Request.HttpMethod == "GET" && context.Request.Url.AbsolutePath == "/employee.html")
+                {
+                    List<Employee> employees = new List<Employee>(_employees);
+                    employees = _employees.Where(e => e.Id == Convert.ToInt32(context.Request.QueryString["id"])).ToList();
+                    content = BuildHtml(filename, employees);
+                }
+                
                 context.Response.ContentType = GetContentType(filename);
                 context.Response.ContentLength64 = System.Text.Encoding.UTF8.GetBytes(content).Length;
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(content);
@@ -157,14 +161,10 @@ public class MyServer
             razorService.AddTemplate(filename, File.ReadAllText(filename));
             razorService.Compile(filename);
         }
-
-        /*if (employee == null)
+        var viewModel = new
         {
-            employee = new Employee();
-            employee.Id = 0;
-            employee.Name = "Not known";
-        }*/
-        var viewModel = new { Employee = employee };
+            Employee = _employees
+        };
         html = razorService.Run(filename, null, viewModel);
         return html;
     }

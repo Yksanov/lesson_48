@@ -11,34 +11,15 @@
 <body>
     
 <div class="container">
-    @if(Model != null){
-    <ul class="list-group">
-        <li class="list-group-item">@Model.Employee.Id</li>
-        <li class="list-group-item">@Model.Employee.Name</li>
-        <li class="list-group-item">@Model.Employee.Surname</li>
-        <li class="list-group-item">@Model.Employee.About</li>
-        <li class="list-group-item">@Model.Employee.Age</li>
-    </ul>
-    } else {
-        <h1>JOPA</h1>
-    }
-<!--
     @foreach(var e in Model.Employee){
-    <table>
-        <tr>
-            <th scope="row">@e.Id</th>
-            <td>@e.Name</td>
-            <td>@e.Surname</td>
-            <td>@e.About</td>
-            <td>@e.Age</td>
-            <td>
-                <a href="employee.html?id=@e.Id">Подробнее</a>
-            </td>
-        </tr>
-    </table>
-    }
--->
-    
+    <ul class="list-group">
+        <li class="list-group-item"><strong>ID: </strong>@e.Id</li>
+        <li class="list-group-item"><strong>Name: </strong>@e.Name</li>
+        <li class="list-group-item"><strong>Surname: </strong>@e.Surname</li>
+        <li class="list-group-item"><strong>About: </strong>@e.About</li>
+        <li class="list-group-item"><strong>Age: </strong>@e.Age</li>
+    </ul>
+    }    
 </div>
 
 </body>
